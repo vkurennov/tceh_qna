@@ -30,7 +30,7 @@ module TcehQna
                        routing_specs: false,
                        requests_specs: false,
                        controller_specs: true
-      #g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
 
     end
   end
