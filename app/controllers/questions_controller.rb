@@ -40,6 +40,7 @@ class QuestionsController < ApplicationController
 
   private
 
+  # comment
   def question_params
     params.require(:question).permit(:title, :body)
   end
