@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { FactoryGirl.create(:question) }
+  let(:question) { create(:question) }
 
   describe "GET #index" do
     before { get :index }
 
     it 'loads all questions' do
-      questions = FactoryGirl.create_list(:question, 3)
+      questions = create_list(:question, 3)
       expect(assigns(:questions)).to eq questions
     end
 
@@ -56,12 +56,12 @@ RSpec.describe QuestionsController, type: :controller do
     context 'valid' do
       it 'saves new question in DB' do
         expect { post :create,
-                      question: FactoryGirl.attributes_for(:question) }.to change(Question, :count).by(1)
+                      question: attributes_for(:question) }.to change(Question, :count).by(1)
       end
 
       it 'redirects to show' do
         post :create,
-             question: FactoryGirl.attributes_for(:question)
+             question: attributes_for(:question)
         expect(response).to redirect_to question_path(assigns(:question))
       end
     end
@@ -69,12 +69,12 @@ RSpec.describe QuestionsController, type: :controller do
     context 'invalid' do
       it 'does not save new question in DB' do
         expect { post :create,
-                      question: FactoryGirl.attributes_for(:invalid_question) }.to_not change(Question, :count)
+                      question: attributes_for(:invalid_question) }.to_not change(Question, :count)
       end
 
       it 'renders show template' do
         post :create,
-             question: FactoryGirl.attributes_for(:invalid_question)
+             question: attributes_for(:invalid_question)
         expect(response).to render_template :new
       end
     end
