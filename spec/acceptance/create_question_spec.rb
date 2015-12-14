@@ -6,7 +6,12 @@ feature 'Create question', %q{
   I want to be able to ask question
 } do
 
+  # background do
+    # то же, что before
+  # end
+
   given!(:user) { create(:user) }
+
 
   scenario 'Authenticated user create question' do
     login(user)
