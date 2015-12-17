@@ -1,4 +1,4 @@
-$('.answers').append('<%= render @answer %>');
-$('.answers-count').html('Answers count: '
-        + '<%= @question.answers.count %>');
+$('.answers-count').html('Answers count: ' + '<%= @question.answers.count %>');
+$('.answers').append('<%= j render @answer %>');
+
 $('#answer_body').val('');
