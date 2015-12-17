@@ -4,12 +4,14 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { create(:user) }
 
+
   describe "GET #index" do
     before { get :index }
 
     it 'loads all questions' do
       questions = create_list(:question, 3)
-      expect(assigns(:questions)).to eq questions
+      expect(assigns(:questions).all).to eq questions
+
     end
 
     it 'renders index template' do
