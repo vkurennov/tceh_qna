@@ -18,8 +18,18 @@ feature 'User answer', %q{
 
     expect(current_path).to eq question_path(question)
 
+    # sleep(2)
     within '.answers' do
       expect(page).to have_content 'My answer'
+    end
+  end
+
+  scenario 'User tries to create invalid answer', js: true do
+    login(user)
+    visit question_path(question)
+    click_on 'Create'
+    within '.answer-errors' do
+      expect(page).to have_content "Body can't be blank"
     end
   end
 end

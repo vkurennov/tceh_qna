@@ -11,6 +11,7 @@
   <%= render @question.answers %>
 </div>
 
+<div class="answer-errors"></div>
 <%= form_for [@question, Answer.new], remote: true do |f| %>
     <%= f.label :body, 'Your answer' %>
     <%= f.text_area :body %>
