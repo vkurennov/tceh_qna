@@ -4,8 +4,12 @@ $('.answer-errors').html('');
     $('.answer-errors').append('<p><%= j message  %></p>');
   <% end %>
 <% else %>
-  $('.answers-count').html('Answers count: ' + '<%= @question.answers.count %>');
-  $('.answers').append('<%= j render @answer %>');
+//  $('.answers-count').html('Answers count: ' + '<%= @question.answers.count %>');
+//  $('.answers').append('<%= j render @answer %>');
 
   $('#answer_body').val('');
+  <% publish_to "/questions/#{@answer.question_id}/answers" do %>
+      $('.answers-count').html('Answers count: ' + '<%= @question.answers.count %>');
+      $('.answers').append('<%= j render @answer %>');
+  <% end %>
 <% end %>

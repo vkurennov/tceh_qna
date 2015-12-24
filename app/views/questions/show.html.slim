@@ -1,15 +1,18 @@
-h1= @question.title
-p
-  = @question.body
-  - if current_user && current_user.author_of?(@question)
-    p= link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
-.answers
-  p.answers-count
-    | Answers count: 
-    = @question.answers.count
-  = render @question.answers
-.answer-errors
-= form_for [@question, Answer.new], remote: true, format: :json do |f|
-  = f.label :body, 'Your answer'
-  = f.text_area :body
-  = f.submit 'Create'
+.question data={ question_id: @question.id }
+  h1= @question.title
+  p
+    = @question.body
+    - if current_user && current_user.author_of?(@question)
+      p= link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
+  .answers
+    p.answers-count
+      | Answers count:
+      = @question.answers.count
+    = render @question.answers
+  .answer-errors
+  = form_for [@question, Answer.new], remote: true, format: :json do |f|
+    = f.label :body, 'Your answer'
+    = f.text_area :body
+    = f.submit 'Create'
+
+= subscribe_to "/questions/#{@question.id}/answers"
