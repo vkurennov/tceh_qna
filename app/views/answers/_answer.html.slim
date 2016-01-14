@@ -1,2 +1,6 @@
 = div_for answer do
   p= answer.body
+  p Attachments:
+  ul
+    - answer.attachments.each do |a|
+      li= link_to a.file_name, a.file.url

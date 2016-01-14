@@ -4,15 +4,24 @@
     = @question.body
     - if current_user && current_user.author_of?(@question)
       p= link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
+  p Attachments:
+  ul
+    - @question.attachments.each do |a|
+      li= link_to a.file_name, a.file.url
   .answers
     p.answers-count
       | Answers count:
       = @question.answers.count
     = render @question.answers
   .answer-errors
-  = form_for [@question, Answer.new], remote: true, format: :json do |f|
+  = form_for [@question, @answer], remote: true, format: :js do |f|
     = f.label :body, 'Your answer'
     = f.text_area :body
+    p Attachments:
+    p
+      = f.fields_for :attachments do |a|
+        = a.label :file
+        = a.file_field :file
     = f.submit 'Create'
 
 = subscribe_to "/questions/#{@question.id}/answers"
