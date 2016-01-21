@@ -1,4 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  # skip_authorization_check
+
   def facebook
     @user = User.find_for_oauth(request.env['omniauth.auth'])
     if @user.persisted?

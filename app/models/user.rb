@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :questions
   has_many :authorizations, dependent: :destroy
+  has_many :answer
 
   def author_of?(object)
     id == object.user_id
