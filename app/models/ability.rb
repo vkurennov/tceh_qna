@@ -24,6 +24,7 @@ class Ability
   def user_abilities
     guest_abilities
     can :manage, [Question, Answer], user_id: user.id
+    can :me, User, id: user.id
 
     #can :create, [Question, Answer]
     #can :destroy, [Question, Answer], user_id: user.id
