@@ -3,6 +3,10 @@ shared_examples_for "Votable" do
 
   let(:user) { create(:user) }
 
+  before do
+    allow(Reputation).to receive(:calculate).and_return(5)
+  end
+
   describe "#vote_up" do
     before do
       subject.vote_up(user)
