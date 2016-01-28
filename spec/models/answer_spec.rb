@@ -9,4 +9,8 @@ describe Answer do
 
   it { should accept_nested_attributes_for :attachments }
 
+
+  it_behaves_like "Votable" do
+    subject { create(:answer) }
+  end
 end

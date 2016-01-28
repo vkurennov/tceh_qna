@@ -48,6 +48,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include AcceptanceHelpers, type: :feature
+  config.include ApiHelpers
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

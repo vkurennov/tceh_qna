@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-let(:question) { create(:question) }
-let(:user) { create(:user) }
+let!(:question) { create(:question) }
+let!(:user) { create(:user) }
 
 
 describe "GET #index" do
@@ -147,8 +147,19 @@ describe "DELETE #destroy" do
     it 'does not delete question from DB' do
       expect { delete :destroy, id: question }.to_not change(Question, :count)
     end
+    end
   end
-end
+
+  describe "POST /vote_up" do
+    before { login(user) }
+
+    it 'calls Question#vote_up method' do
+      question = create(:question)
+      allow(Question).to receive(:find).and_return(question)
+      expect(question).to receive(:vote_up).with(user)
+      post :vote_up, id: question
+    end
+  end
 end
 
 

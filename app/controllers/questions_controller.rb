@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :load_question, only: [:show, :edit,
+                                       :update, :destroy, :vote_up]
 
-  authorize_resource
+  authorize_resource except: :vote_up
 
   def index
     @questions = Question.all
@@ -43,6 +44,11 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     redirect_to questions_path
+  end
+
+  def vote_up
+    @question.vote_up(current_user)
+    render nothing: true
   end
 
   private
