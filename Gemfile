@@ -33,6 +33,9 @@ gem 'omniauth-facebook'
 gem 'cancancan'
 gem 'doorkeeper'
 gem 'active_model_serializers'
+gem 'sidekiq'
+gem 'whenever'
+gem 'sinatra', require: false
 
 
 group :development, :test do
