@@ -48,10 +48,14 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include AcceptanceHelpers, type: :feature
+  config.include SphinxHelpers, type: :feature
   config.include ApiHelpers
+
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    ThinkingSphinx::Test.init
+    ThinkingSphinx::Test.start_with_autostop
   end
 
   config.before(:each) do
@@ -59,6 +63,10 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each, sphinx: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
