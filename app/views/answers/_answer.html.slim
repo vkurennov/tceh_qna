@@ -1,5 +1,7 @@
 = div_for answer do
   p= answer.body
+  - if can?(:destroy, answer)
+    p= link_to 'Delete', answer, method: :delete, data: {confirm: 'Are you sure?'}
   p Attachments:
   ul
     - answer.attachments.each do |a|

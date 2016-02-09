@@ -28,4 +28,21 @@ describe Answer do
       subject.update!(body: "123")
     end
   end
+
+  describe '#set_best' do
+    let!(:question) { create(:question) }
+    let!(:other_answer) { create(:answer, best: true, question: question) }
+    let(:answer) { create(:answer, best: false, question: question) }
+
+
+    it 'sets best flag to true' do
+      answer.set_best
+      expect(answer).to be_best
+    end
+
+    it 'change other answers best flag to false' do
+      answer.set_best
+      expect(other_answer.reload).to_not be_best
+    end
+  end
 end
