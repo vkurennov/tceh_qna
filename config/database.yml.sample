@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: tceh_qna_dev
+
+test:
+  <<: *default
+  database: tceh_qna_test
+
+
