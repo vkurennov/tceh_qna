@@ -16,6 +16,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :passenger_restart_with_touch, true
 
+set :sidekiq_queue, ['default', 'mailers']
+set :stage, 'production'
+
 namespace :deploy do
 
   after :restart, :clear_cache do
